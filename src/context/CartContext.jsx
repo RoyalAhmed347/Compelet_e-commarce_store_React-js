@@ -4,26 +4,7 @@ import reducer from "../Reduser/CartReducer";
 const CartContext = createContext();
 
 const initialStat = {
-  cartItem: [
-    {
-      color: "#FFD700",
-      id: "307f166f-1d04-4573-bc37-2f461ea9d4f7_#FFD700",
-      img: "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-      price: 73771.94,
-      quantity: 5,
-      stock: 34,
-      title: "iPhone X",
-    },
-    {
-      color: "#54E2E9",
-      id: "ac44095f-230e-4502-8816-dea3eaae8320_#54E2E9",
-      img: "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
-      price: 96898.83000000002,
-      quantity: 2,
-      stock: 96,
-      title: "Infinix INBOOK",
-    },
-  ],
+  cartItem: [],
 };
 
 const CartContextProvider = ({ children }) => {
