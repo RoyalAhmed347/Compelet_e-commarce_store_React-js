@@ -11,7 +11,7 @@ const ListViewProduct = ({ elem }) => {
       <Link className="list_product_link" to={`/product/${id}`}>
         <figure className="list_img">
           <img src={thumbnail} alt="" />
-          <figcaption className="caption">{brand}</figcaption>
+          {brand && <figcaption className="caption">{brand}</figcaption>}
         </figure>
       </Link>
       <div className="list_product_details">
@@ -20,7 +20,7 @@ const ListViewProduct = ({ elem }) => {
           <FormatePrice price={price} />
         </p>
         <p className="text list_data-detalis">
-          {description.slice(0, 120) + "..."}
+          {description?.slice(0, 120) + "..."}
         </p>
         <div className="rating">
           <CountStartRating rating={rating} />

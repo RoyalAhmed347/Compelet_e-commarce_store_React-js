@@ -14,7 +14,7 @@ const FeatureProducts = () => {
           </div>
           <div className="feature_posts">
             <div className="featureLoading">
-              <p className="text">...Loading</p>
+              <p className="text">Loading...</p>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@ const FeatureProducts = () => {
           <h2 className="sub_heading">Our feature section</h2>
         </div>
         <div className="feature_posts">
-          {featuresProducts.map((elem) => {
+          {featuresProducts.slice(0, 6).map((elem) => {
             return <GridViewProduct key={elem.id} elem={elem} />;
           })}
         </div>

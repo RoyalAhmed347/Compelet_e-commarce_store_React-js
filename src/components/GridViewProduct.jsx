@@ -11,7 +11,9 @@ const GridViewProduct = ({ elem }) => {
       <Link className="produst_link" to={`/product/${id}`}>
         <figure className="grid_img">
           <img src={thumbnail} alt={title} />
-          <figcaption className="caption">{brand}</figcaption>
+          {brand &&
+            <figcaption className="caption">{brand}</figcaption>
+          }
         </figure>
       </Link>
 

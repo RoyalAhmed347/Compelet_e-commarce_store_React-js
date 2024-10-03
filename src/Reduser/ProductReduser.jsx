@@ -8,7 +8,7 @@ const ProductReduser = (state, action) => {
 
     case "set_api_data":
       const featureposts = action.payload.filter((elem) => {
-        return elem.feature === true;
+        return elem.rating >= 4;
       });
       return {
         ...state,

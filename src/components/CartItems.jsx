@@ -41,7 +41,7 @@ const CartItems = () => {
                   </div>
                   <div className="detail">
                     <div className="left">
-                      <Link to={"/product/" + id.slice(0, -8)}>
+                      <Link to={"/product/" + id?.slice(0, -8)}>
                         <h2 className="sub_heading">{title}</h2>
                       </Link>
                       <button

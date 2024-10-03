@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import reduser from "../Reduser/ProductReduser";
-import Products from "../ProductData/Products.json";
+// import Products from "../ProductData/Products.json";
+import axios from "axios";
 const initialStat = {
   isLoading: false,
   isError: false,
@@ -17,26 +18,44 @@ const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reduser, initialStat);
 
   useEffect(() => {
-    dispatch({ type: "product_loading" });
-    dispatch({
-      type: "set_api_data",
-      payload: Products,
-    });
+    getAllProduct();
+    // dispatch({
+    //   type: "set_api_data",
+    //   payload: Products,
+    // });
   }, []);
 
-  const getSingelProduct = (selectedId) => {
-    dispatch({ type: "singel_product_loading" });
+  const getAllProduct = async () => {
+    try {
+      dispatch({ type: "product_loading" });
+      const res = await axios.get('https://dummyjson.com/products')
+      console.log("🚀 ~ getAllProduct ~ res:", res)
+      dispatch({
+        type: "set_api_data",
+        payload: res.data.products,
+      });
 
-    const present = Products.find((elem) => elem.id === selectedId);
+    } catch (error) {
+      console.log("🚀 ~ getAllProduct ~ error:", error)
 
-    if (present) {
-      let selectedItem = Products.filter((elem) => elem.id === selectedId);
-      selectedItem = selectedItem[0];
-
-      dispatch({ type: "singel_set_api_data", payload: selectedItem });
-    } else {
-      dispatch({ type: "singel_product_error" });
     }
+  }
+
+
+  const getSingelProduct = async (selectedId) => {
+
+    try {
+      dispatch({ type: "singel_product_loading" });
+
+      const res = await axios.get(`https://dummyjson.com/products/${selectedId}`)
+
+      dispatch({ type: "singel_set_api_data", payload: res.data });
+    } catch (error) {
+      dispatch({ type: "singel_product_error" });
+
+    }
+
+
   };
 
   return (

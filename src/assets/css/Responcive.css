@@ -100,15 +100,18 @@
   }
   .product_imgs {
     width: 100%;
+    display: flex;
     flex-direction: column-reverse;
+    /* justify-content: center;
+    align-items: center; */
     gap: 4rem;
   }
   .product_imgs .all_imgs {
     flex-direction: row;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    overflow: scroll;
+    overflow: auto;
   }
   .product_imgs .main_img {
     width: 100%;

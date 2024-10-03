@@ -61,13 +61,13 @@ const FilterSection = () => {
             {companyList.map((elem, index) => {
               return (
                 <option name="company" value={elem} key={index}>
-                  {elem.slice(0, 19)}
+                  {elem?.slice(0, 19)}
                 </option>
               );
             })}
           </select>
         </div>
-        <div className="color">
+        {/* <div className="color">
           <h2 className="sub_heading">Colors</h2>
           <ul>
             <button
@@ -93,7 +93,7 @@ const FilterSection = () => {
               );
             })}
           </ul>
-        </div>
+        </div> */}
 
         <div className="price">
           <h2 className="sub_heading">Price</h2>

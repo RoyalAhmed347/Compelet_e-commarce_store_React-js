@@ -9,32 +9,40 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import { SiTcs } from "react-icons/si";
 import CountStartRating from "../Helper/CountStartRating";
 import ProductAddToCart from "../components/ProductAddToCart";
+import ProductReviews from "../components/ProductReviews";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const { getSingelProduct, productIsLoading, singelProduct, productIsError } =
     useProductContext();
+
+
   useEffect(() => {
     getSingelProduct(id);
   }, []);
   const {
     id: alips,
+    sku,
     title,
     images,
     price,
     reviews,
     thumbnail,
     rating,
-    stock,
+    // stock,
     description,
     discountPercentage,
+    returnPolicy,
     brand,
+    warrantyInformation,
+    availabilityStatus,
+    shippingInformation
   } = singelProduct;
 
   if (productIsLoading) {
     return (
       <div className="lodingProduct">
-        <p className="text">...Loading</p>
+        <p className="text">Loading...</p>
       </div>
     );
   } else if (productIsError) {
@@ -80,7 +88,7 @@ const SingleProduct = () => {
               <div className="product_details">
                 <h2 className="title">{title}</h2>
                 <div className="text">
-                  <CountStartRating rating={rating} reviews={reviews} />
+                  <CountStartRating rating={rating} reviews={reviews?.length} />
                 </div>
                 <p className="text ">
                   <span>MRP: </span>
@@ -106,31 +114,31 @@ const SingleProduct = () => {
 
                   <div className="product_service">
                     <TbReplace size={25} className="icon" />
-                    <p className="text">30 Days Replacement</p>
+                    <p className="text">{returnPolicy}</p>
                   </div>
                   <div className="product_service">
                     <SiTcs size={25} className="icon" />
-                    <p className="text">TCS Delivered</p>
+                    <p className="text">{shippingInformation}</p>
                   </div>
                   <div className="product_service">
                     <RiSecurePaymentFill size={25} className="icon" />
-                    <p className="text">2 years warranty</p>
+                    <p className="text">{warrantyInformation}</p>
                   </div>
                 </div>
                 <p className="text">
                   Availabel:
-                  <span> {stock > 0 ? "In Stock" : "Out of Stock"}</span>
+                  <span> {availabilityStatus}</span>
                 </p>
                 <p className="text">
                   ID:
-                  <span> {alips}</span>
+                  <span> {sku}</span>
                 </p>
-                <p className="text">
+                {brand && <p className="text">
                   Brand:
                   <span> {brand}</span>
-                </p>
+                </p>}
                 <hr />
-                {stock > 0 && <ProductAddToCart product={singelProduct} />}
+                {availabilityStatus && <ProductAddToCart product={singelProduct} />}
               </div>
             </div>
           </div>
@@ -140,28 +148,5 @@ const SingleProduct = () => {
   }
 };
 
-// {
-//   "id": "13cbc7ed-a61b-4883-9d42-82d7d8642b86",
-//   "seller": "Addidas",
-//   "reviews": 4355,
-//   "shipping": 14,
-//   "quantity": 0,
-//   "title": "iPhone 9",
-//   "description": "An apple mobile which is nothing like apple",
-//   "price": 549,
-//   "discountPercentage": 12.96,
-//   "rating": 4.69,
-//   "stock": 94,
-//   "brand": "Apple",
-//   "category": "smartphones",
-//   "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-//   "color": ["#808080", "#C0C0C0", "#000000"],
-//   "images": [
-//     "https://i.dummyjson.com/data/products/1/1.jpg",
-//     "https://i.dummyjson.com/data/products/1/2.jpg",
-//     "https://i.dummyjson.com/data/products/1/3.jpg",
-//     "https://i.dummyjson.com/data/products/1/4.jpg",
-//     "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-//   ]
-// }
+
 export default SingleProduct;

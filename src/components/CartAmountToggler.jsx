@@ -1,9 +1,9 @@
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-const CartAmountToggler = ({ totalitem, Decreacs, Increacs }) => {
+const CartAmountToggler = ({ totalitem, Decreacs, Increacs, min = 1 }) => {
   return (
     <div className="toggler_style">
-      <button onClick={() => Decreacs()}>
+      <button disabled={totalitem <= min} onClick={() => Decreacs()}  >
         <FaMinus />
       </button>
 

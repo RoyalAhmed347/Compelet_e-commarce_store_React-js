@@ -6,9 +6,10 @@ import { useCartContext } from "../context/CartContext";
 
 const ProductAddToCart = ({ product }) => {
   const { addToCart } = useCartContext();
-  const { id, stock, colors } = product;
-  const [color, setcolor] = useState(colors[0]);
-  const [totalitem, settotalitem] = useState(1);
+  const { id, stock, colors, minimumOrderQuantity } = product;
+  const [color, setcolor] = useState(null);
+  // const [color, setcolor] = useState(colors[0]);
+  const [totalitem, settotalitem] = useState(minimumOrderQuantity);
 
   const Increacs = () => {
     totalitem < stock ? settotalitem(totalitem + 1) : settotalitem(stock);
@@ -19,7 +20,7 @@ const ProductAddToCart = ({ product }) => {
   return (
     <>
       <div className="product_colors">
-        {colors.map((elem, index) => {
+        {/* {colors.map((elem, index) => {
           return (
             <button
               key={index}
@@ -30,13 +31,14 @@ const ProductAddToCart = ({ product }) => {
               {elem === color && <FaCheck className="check" />}
             </button>
           );
-        })}
+        })} */}
       </div>
       <CartAmountToggler
         key={id}
         totalitem={totalitem}
         Decreacs={Decreacs}
         Increacs={Increacs}
+        min={minimumOrderQuantity}
       />
       <Link to="/cart" style={{ maxWidth: "max-content" }}>
         <button
